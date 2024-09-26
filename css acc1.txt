@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('B2.gif');
+    background-position: center;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100vh;
+}
+
+.transparent-frame,
+.transparent-frame2,
+.transparent-frame3 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 50px; 
+    overflow: hidden;
+}
+
+.transparent-frame {
+    top: 40%;
+    left: 50%;
+}
+
+.transparent-frame2 {
+    top: 45%;
+    left: 18%;
+}
+
+.transparent-frame3 {
+    top: 45%;
+    left: 82%;
+}
+.transparent-frame1 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 180px; 
+    overflow: hidden;
+    top: 35%;
+    left: 50%;
+    border-radius: 100%;
+}
+
+
+header {
+    font-family:'cooper black', sans-serif;
+    font-style: oblique;
+    text-align: center;
+    color: white;
+    text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.836);
+    animation: move 2s ease-in-out infinite; 
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.frame-button,
+.frame-button1,
+.frame-button2 {
+    display: block;
+    position: absolute;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.frame-button {
+    background-image: url('dog.gif');
+    top: 530px;
+    left: 200px;
+}
+
+.frame-button1 {
+    background-image: url('cat.gif');
+    top: 530px;
+    left: 1080px;
+}
+
+.frame-button2 {
+    background-image: url('q.gif');
+    top: 530px;
+    left: 630px;
+}
+
+.frame-button,
+.frame-button1,
+.frame-button2 {
+    background-size: cover;
+    padding: 50px;
+    border-radius: 100px;
+}
+
+@keyframes move {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}

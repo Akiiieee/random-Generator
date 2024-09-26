@@ -1,0 +1,105 @@
+document.addEventListener('DOMContentLoaded', () => {
+    preloadInitialDogImage();
+    preloadInitialCatImage();
+});
+
+const initialDogImage = document.getElementById('initialDogImage');
+const initialCatImage = document.getElementById('initialCatImage');
+const contentFrame1 = document.getElementById('contentFrame1');
+
+function preloadInitialDogImage() {
+
+    initialDogImage.src = '63.gif';
+    initialDogImage.style.borderRadius = '50%'
+    
+}
+
+function preloadInitialCatImage() {
+    initialCatImage.src = 'anya.gif';
+    initialCatImage.style.borderRadius = '50%';
+}
+
+
+let dogBtn = document.getElementById('dogsGenerator');
+let catBtn = document.getElementById('catsGenerator');
+let quoteBtn = document.getElementById('quotesGenerator');
+let contentFrame2 = document.getElementById('contentFrame2');
+let contentFrame3 = document.getElementById('contentFrame3');
+
+const borderSize = 160;
+
+dogBtn.addEventListener('click', generateRandomDog);
+catBtn.addEventListener('click', generateRandomCat);
+quoteBtn.addEventListener('click', generateRandomQuote);
+
+function drawImageAnimation(img, borderSize) {
+    let borderWidth = 0;
+    const animationInterval = setInterval(() => {
+        borderWidth += 2;
+        img.style.border = `${borderWidth}px solid rgba(255, 255, 255, 0.397)`;
+
+        if (borderWidth >= borderSize / 2) {
+            clearInterval(animationInterval);
+        }
+    }, 50);
+}
+
+function generateRandomDog() {
+    fetch("https://dog.ceo/api/breeds/image/random")
+        .then(response => response.json())
+        .then(data => {
+            const img = document.createElement('img');
+            img.src = data.message;
+            img.style.width = `${borderSize}px`;
+            img.style.height = `${borderSize}px`;
+            img.style.borderRadius = '50%';
+            contentFrame2.innerHTML = '';
+            contentFrame2.appendChild(img);
+            drawImageAnimation(img, borderSize);
+        })
+        .catch(error => {
+            console.error('Error fetching dog content:', error.message);
+        });
+}
+
+function generateRandomCat() {
+    fetch("https://api.thecatapi.com/v1/images/search")
+        .then(response => response.json())
+        .then(data => {
+            const img = document.createElement('img');
+            img.src = data[0].url;
+            img.style.width = `${borderSize}px`;
+            img.style.height = `${borderSize}px`; 
+            img.style.borderRadius = '50%';
+            
+            contentFrame2.style.padding = '0';
+            contentFrame3.style.padding = '0';
+
+            contentFrame3.innerHTML = '';
+            contentFrame3.appendChild(img);
+            drawImageAnimation(img, borderSize);
+        })
+        .catch(error => {
+            console.error('Error fetching cat content:', error.message);
+        });
+}
+
+
+function generateRandomQuote() {
+    fetch("https://api.quotable.io/random")
+        .then(response => response.json())
+        .then(data => {
+            const quote = document.createElement('p');
+            quote.textContent = data.content;
+            const author = document.createElement('p');
+            author.textContent = `- ${data.author}`;
+            contentFrame1.innerHTML = '';
+            contentFrame2.innerHTML = '';
+            contentFrame3.innerHTML = '';
+            contentFrame1.appendChild(quote);
+            contentFrame1.appendChild(author);
+        })
+        .catch(error => {
+            console.error('Error fetching quote content:', error.message);
+        });
+}
